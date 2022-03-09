@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.java.mapper.ProductInfoMapper;
 import com.java.pojo.ProductInfo;
 import com.java.pojo.ProductInfoExample;
+import com.java.pojo.vo.ProductInfoVo;
 import com.java.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,33 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     @Override
     public ProductInfo getByID(int pid) {
         return productInfoMapper.selectByPrimaryKey(pid);
+    }
+
+    @Override
+    public int update(ProductInfo info) {
+        return productInfoMapper.updateByPrimaryKey(info);
+    }
+
+    @Override
+    public int delete(int pid) {
+        return productInfoMapper.deleteByPrimaryKey(pid);
+    }
+
+    @Override
+    public int deleteBatch(String[] ids) {
+        return productInfoMapper.deleteBatch(ids);
+    }
+
+    @Override
+    public List<ProductInfo> selectCondition(ProductInfoVo vo) {
+        return productInfoMapper.selectCondition(vo);
+    }
+
+    @Override
+    public PageInfo splitPageVo(ProductInfoVo vo, int pageSize) {
+        //取出集合之前,先要设置PageHelper.startPage()属性
+        PageHelper.startPage(vo.getPage(),pageSize);
+        List<ProductInfo> list = productInfoMapper.selectCondition(vo);
+        return new PageInfo<>(list);
     }
 }

@@ -3,6 +3,8 @@ package com.java.mapper;
 import com.java.pojo.ProductInfo;
 import com.java.pojo.ProductInfoExample;
 import java.util.List;
+
+import com.java.pojo.vo.ProductInfoVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +31,10 @@ public interface ProductInfoMapper {
     int updateByPrimaryKeySelective(ProductInfo record);
 
     int updateByPrimaryKey(ProductInfo record);
+
+
+    //批量删除商品的功能
+    int deleteBatch(String []ids);
+    //多条件查询商品
+    List<ProductInfo> selectCondition(ProductInfoVo vo);
 }

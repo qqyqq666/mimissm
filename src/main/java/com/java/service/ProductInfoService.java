@@ -2,6 +2,7 @@ package com.java.service;
 
 import com.github.pagehelper.PageInfo;
 import com.java.pojo.ProductInfo;
+import com.java.pojo.vo.ProductInfoVo;
 
 import java.util.List;
 
@@ -21,4 +22,17 @@ public interface ProductInfoService {
 
     //按主键id查询商品
     ProductInfo getByID(int pid);
+    //更新商品
+    int update(ProductInfo info);
+
+    //单个商品删除
+    int delete(int pid);
+
+    //批量删除商品
+    int deleteBatch(String []ids);
+    //多条件商品查询
+    List<ProductInfo> selectCondition(ProductInfoVo vo);
+
+    //多条件查询分页
+    public PageInfo splitPageVo(ProductInfoVo vo,int pageSize);
 }
